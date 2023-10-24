@@ -1,23 +1,21 @@
 import { useState } from 'react';
 
+const trafficLightColors = [
+  ['red',   'black',  'black'],
+  ['black', 'black',  'green'],
+  ['black', 'yellow', 'black']
+];
+
 export const FunctionalTrafficLight = () => {
   const [count, setCount] = useState(0);
 
-  let redLight = 'black';
-  let yellowLight = 'black';
-  let greenLight = 'black';
-  if (count == 0) {
-    redLight = 'red';
-  } else if (count == 1) {
-    greenLight = 'green';
-  } else {
-    yellowLight = 'yellow';
-  }
+  const trafficLightState = trafficLightColors[count];
 
   const increment = () => {
-    setCount(count + 1);
     if (count >= 2) {
       setCount(0);
+    } else {
+      setCount(count + 1);
     }
   }
 
@@ -26,9 +24,9 @@ export const FunctionalTrafficLight = () => {
       <h2>Functional Traffic Light</h2>
       <div className="traffic-light">
         {/* Background color can be black | yellow | red | green */}
-        <div className={`circle ${redLight}`}></div>
-        <div className={`circle ${yellowLight}`}></div>
-        <div className={`circle ${greenLight}`}></div>
+        <div className={`circle ${trafficLightState[0]}`}></div>
+        <div className={`circle ${trafficLightState[1]}`}></div>
+        <div className={`circle ${trafficLightState[2]}`}></div>
       </div>
       <button className="next-state-button" onClick={increment}>Next State</button>
     </div>
